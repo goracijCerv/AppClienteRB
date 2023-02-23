@@ -19,18 +19,18 @@ export class TestErrorComponent implements OnInit {
   get400Error() {
     this.http.get(this.baseUrl + 'buggy/bad-request').subscribe({
       next: response => console.log(response),
-      error: error =>{ 
-        console.log(error)
-        this.validationErrors = error;
-      }
+      error: error => console.log(error)
     })
   }
 
   get400ValidationError() {
-    this.http.post(this.baseUrl + 'account/register', {}).subscribe({
-      next: response => console.log(response),
-      error: error => console.log(error)
-    })
+   this.http.get(this.baseUrl + 'account/register', {}).subscribe({
+    next: response => console.log(response),
+    error: error => {
+      console.log(error);
+      this.validationErrors = error;
+    }
+   })
   }
 
   get401Error() {

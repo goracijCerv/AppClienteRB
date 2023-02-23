@@ -1,1 +1,15 @@
-<p>server-error works!</p>
+<h1>Internal server error - refreshing the page will make error disapper</h1>
+<ng-container *ngIf="error">
+    <h5 class="text-danger">Error: {{error.massage}}</h5>
+    <p class="font-weight-bold">Note: if tou are seeing this, then Angular is probably not the culpirt</p>
+    <p>What to do next?</p>
+    <ol>
+        <li>Open browser dev tools! then click the failing request in the network tab.</li>
+        <li>Examine the request url - what API endpoint are you requesting? </li>
+        <li>Reproduce the error in Postman - if you get the same errror, Angular is 100% not gulty</li>
+    </ol>
+    <p style="font-weight: bold">Following is the stack trace - the first few lines will twll you which line of code in the API caused the issue</p>
+    <code class="mt-5">
+    {{error.details}}
+    </code>
+</ng-container>
