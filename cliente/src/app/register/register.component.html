@@ -1,4 +1,4 @@
-<form [formGroup]="registerForm" (ngSubmit)="register()" autocomplete="off">
+<form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && register()" autocomplete="off">
     <h2 class="text-center text-primary">Register</h2>
     <hr>
     
@@ -24,7 +24,7 @@
 
     <app-date-picker
     [formControl]="$any(registerForm.controls['dateOfBirth'])" 
-    [label]="'Date of Birth'" [maxDate]>
+    [label]="'Date of Birth'" [maxDate]="maxDate">
     </app-date-picker>
 
     <app-text-input 
@@ -55,7 +55,7 @@
     </div>
 
     <div class="text-center">
-        <button class="btn btn-success me-2" type="submit">Register</button>
+        <button [disabled]="!registerForm.valid" class="btn btn-success me-2" type="submit">Register</button>
         <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
     </div>
 </form>

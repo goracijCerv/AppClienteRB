@@ -46,6 +46,8 @@ export class RegisterComponent  implements OnInit{
   }
 
   register(): void {
+    const dob = this.getDateOnly(this.registerForm.controls['dateOfBirth'].value);
+    const values = {...this.registerForm.value,dateOfBirth: dob};
      this.accountService.register(this.registerForm.value).subscribe({
        next: () => {
         this.router.navigateByUrl('/members');

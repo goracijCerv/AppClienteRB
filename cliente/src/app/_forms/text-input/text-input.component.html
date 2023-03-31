@@ -1,19 +1,25 @@
 <div class="mb-3">
+    
     <input type="{{type}}"
         [class.is-invalid]="Control.touched && Control.invalid"
         class="form-control" 
         [formControl]="Control" 
         placeholder="{{label}}">
+
     <div class="invalid-feedback" *ngIf="Control.errors?.['required']">
         Porfvaor ingrese un(a) {{label}}
     </div>
+
     <div class="invalid-feedback" *ngIf="Control.errors?.['minlength']">
        El campo {{label}} debe ser de {{Control.errors?.['minlength'].requiredLength}}  caracteres minimo
     </div>
+
     <div class="invalid-feedback" *ngIf="Control.errors?.['maxlength']">
         El campo {{label}} debe ser de {{Control.errors?.['maxlength'].requiredLength}}  caracteres maximo
     </div>
+    
     <div class="invalid-feedback" *ngIf="Control.errors?.['notMatching']">
         Las contraseñas no considen 
     </div>
+    
 </div>
