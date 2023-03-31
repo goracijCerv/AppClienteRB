@@ -32,4 +32,10 @@ export class MemberListComponent {
     })
   }
   
+  pageChanged(event:any){
+    if(this.pageNumber !== event.page){
+      this.pageNumber =event.page;
+      this.loadMembers();
+    }
+  }
 }
