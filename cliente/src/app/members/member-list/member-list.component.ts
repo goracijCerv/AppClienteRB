@@ -18,6 +18,7 @@ export class MemberListComponent {
   pagination: Pagination | undefined;
   userParams: UserParams | undefined;
   user: User | undefined;
+  genderList=[{value:'male',display:'Males'},{value:'female',display:'Females'}];
   
   constructor(private memberService: MembersService, private accountService: AccountService){
     this.accountService.currentUser$.pipe(take(1)).subscribe({
@@ -34,6 +35,7 @@ export class MemberListComponent {
     //this.members$=this.memberService.getMembers();
     this.loadMembers()
   }
+
   loadMembers(){
     if(!this.userParams) return;
     this.memberService.getMembers(this.userParams).subscribe({
@@ -46,6 +48,13 @@ export class MemberListComponent {
     })
   }
   
+  resetFilters(){
+    if(this.user){
+      this.userParams = new UserParams(this.user)
+      this.loadMembers();
+    }
+  }
+
   pageChanged(event:any){
     if(this.userParams && this.userParams?.pageNumber !== event.page){
       this.userParams.pageNumber =event.page;
