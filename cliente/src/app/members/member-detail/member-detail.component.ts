@@ -13,15 +13,24 @@ import { MessageService } from 'src/app/_services/message.service';
   styleUrls: ['./member-detail.component.css']
 })
 export class MemberDetailComponent implements OnInit{
-  @ViewChild('memberTabs') memberTabs?: TabsetComponent;
+  @ViewChild('memberTabs', {static: true}) memberTabs?: TabsetComponent;
   memeber: Member | undefined;
   gallaryOptions: NgxGalleryOptions[]=[];
   gallaryImages: NgxGalleryImage[]= [];
-  constructor(private memebersService: MembersService, private route: ActivatedRoute, private messageService: MessageService){}
   activateTab?: TabDirective;
   messages: Message[] =[];
+  
+  constructor(private memebersService: MembersService, private route: ActivatedRoute, private messageService: MessageService){}
+  
   ngOnInit(): void {
     this.loadMember();
+
+    this.route.queryParams.subscribe({
+      next: params =>{
+        params['tab'] && this.selectTab(params['tab'])
+      }
+    });
+
     this.gallaryOptions = [
       {
         width: '500px',
@@ -58,6 +67,12 @@ export class MemberDetailComponent implements OnInit{
         this.gallaryImages = this.getImages();
       }
     });
+  }
+
+  selectTab(heading: string){
+    //if(this.memberTabs){
+      this.memberTabs!.tabs!.find(x => x.heading === heading)!.active = true;
+    //}
   }
 
   loadMessages(){
